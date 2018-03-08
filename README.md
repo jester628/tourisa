@@ -1,2 +1,0 @@
-# tourisa
-Ionic Mobile Application
