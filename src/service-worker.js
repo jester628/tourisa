@@ -7,6 +7,10 @@
 'use strict';
 importScripts('./build/sw-toolbox.js');
 
+var admin = require("firebase-admin");
+var serviceAccount = require("../../resources/tourisa-628ef-firebase-adminsdk-mbdyn-726cd9a14e.json");
+
+
 self.toolbox.options.cache = {
   name: 'ionic-cache'
 };

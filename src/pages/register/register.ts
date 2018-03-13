@@ -22,7 +22,9 @@ export class RegisterPage {
             console.log(result);
             console.log(user);
             if (result) {
-                this.navCtrl.setRoot(ProfilePage);
+            
+            this.navCtrl.setRoot(ProfilePage);
+            
             } else if (typeof result == undefined) {
                 this.toast.create({
                     message: `Wrong input`,
@@ -36,7 +38,8 @@ export class RegisterPage {
                 }).present();
             }
         } catch (e) {
-            console.log(result)
+            console.log("----");
+            console.error(e);
         }
     }
 }

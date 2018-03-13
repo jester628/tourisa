@@ -1,10 +1,9 @@
-import { Component, NgZone } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading, IonicPage, ToastController } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from "../../modals/user";
 import { HomePage } from "../../pages/home/home";
-import { RegisterPage } from "../../pages/register/register"
+import { RegisterPage } from "../../pages/register/register";
 
 @Component({
   selector: 'page-login',
@@ -13,8 +12,8 @@ import { RegisterPage } from "../../pages/register/register"
 
 export class LoginPage {
   user = {} as User;
-  
-  constructor (private ofAuth: AngularFireAuth, private zone: NgZone, private toast: ToastController, public navCtrl: NavController) {
+
+  constructor (private ofAuth: AngularFireAuth, public navCtrl: NavController) {
   
   }
   
@@ -22,20 +21,28 @@ export class LoginPage {
     this.navCtrl.push(RegisterPage);
   }
   
-async login(user: User) {
+  async login(user: User) {
         try {
-            const result = await this.ofAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
+            var require: any; 
+            var admin = require("firebase-admin");
+            const result = this.ofAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
             if (result) {
-                this.navCtrl.setRoot(HomePage);
-            } else {
-                this.zone.run(() => {
-                    this.toast.create({
-                        message: `The password is invalid or the user does not have a password`,
-                        duration: 3000
-                    }).present();
-                });
+                console.log("User is logged in");
+                    var uid = "some-uid";
+                    admin.ofAuth.createCustomToken(uid).then(function(customToken) {
+                        this.navCtrl.setRoot(HomePage);
+                      })
+                      .catch(function(e) {
+                        console.log(e);
+                        this.toast.create({
+                            message: `Cannot login`,
+                            duration: 3000
+                        }).present();
+                      });
             }
-        } catch (e) {
+            
+            } catch (e) {
+            console.log("----");
             console.error(e);
         }
    }

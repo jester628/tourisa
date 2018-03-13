@@ -18,7 +18,8 @@ export class HomePage {
             if (data.email && data.uid)  {
                 this.toast.create({
                     message: `Welcome to Tourisa, ${data.email}`,
-                    duration: 3000
+                    duration: 3000,
+                    position: 'top'
                 }).present();
             } else {
                 this.toast.create({
@@ -28,16 +29,14 @@ export class HomePage {
             }
         });
     }
-        async logout(): Promise<void>{
-            try {
-                return this.ofAuth.auth.signOut().then(function() {
-                     this.toast.create({ 
-                        message: `Logout successful`,
-                        duration: 3000
-                     });
-                });
-            } catch (e) {
-
-            }
+    
+    logout() {
+        try {
+            this.navCtrl.setRoot(LoginPage);
+        } catch (e) {
+            console.error(e);
         }
-}
+    } 
+}    
+
+
