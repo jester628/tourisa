@@ -16,21 +16,22 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
-declare var require: any; 
-var admin = require("firebase-admin");
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import * as admin from "firebase-admin";
 var serviceAccount = require("../../resources/tourisa-628ef-firebase-adminsdk-mbdyn-726cd9a14e.json");
 
-
-export const firebaseConfig = {
+export const appConfig = {
+    databaseURL: "https://tourisa-628ef.firebaseio.com",
+    credential: admin.credential.cert(serviceAccount),
     apiKey: "AIzaSyDB3ohWWUA7F0ppgDwCgP-KN2IcgYZYOR0",
     authDomain: "tourisa-628ef.firebaseapp.com",
-    databaseURL: "https://tourisa-628ef.firebaseio.com",
     projectId: "tourisa-628ef",
     storageBucket: "tourisa-628ef.appspot.com",
     messagingSenderId: "595936375688",
-    credential: admin.credential.cert(serviceAccount)
 };
+
+admin.initializeApp(appConfig);
 
 @NgModule({
   declarations: [
@@ -45,9 +46,11 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(appConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    HttpClientModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Go Back',
       iconMode: 'ios',

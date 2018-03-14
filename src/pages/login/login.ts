@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from "../../modals/user";
 import { HomePage } from "../../pages/home/home";
 import { RegisterPage } from "../../pages/register/register";
+import * as admin from "firebase-admin";
 
 @Component({
   selector: 'page-login',
@@ -13,7 +14,7 @@ import { RegisterPage } from "../../pages/register/register";
 export class LoginPage {
   user = {} as User;
 
-  constructor (private ofAuth: AngularFireAuth, public navCtrl: NavController) {
+  constructor (private ofAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController) {
   
   }
   
@@ -23,30 +24,24 @@ export class LoginPage {
   
   async login(user: User) {
         try {
-            var require: any; 
-            var admin = require("firebase-admin");
             const result = this.ofAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
             if (result) {
-                console.log("User is logged in");
-                    var uid = "some-uid";
-                    admin.ofAuth.createCustomToken(uid).then(function(customToken) {
-                        this.navCtrl.setRoot(HomePage);
-                      })
-                      .catch(function(e) {
-                        console.log(e);
-                        this.toast.create({
-                            message: `Cannot login`,
-                            duration: 3000
-                        }).present();
-                      });
-            }
-            
-            } catch (e) {
-            console.log("----");
+                console.log("User is autheticated");
+                var uid = "some-uid";
+                admin.auth().createCustomToken(uid).then((customToken) => {
+                    this.navCtrl.setRoot(HomePage);
+                }).catch(function(e) {
+                console.log(e)
+                this.toast.create({
+                    message: `Cannot login`,
+                    duration: 3000
+                }).present();
+               });
+             }
+          } catch (e) {
             console.error(e);
         }
    }
-
 }
 
  
