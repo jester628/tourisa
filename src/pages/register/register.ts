@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { User } from "../../modals/user";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ProfilePage } from '../profile/profile';
 
+@IonicPage()
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html',
@@ -20,26 +21,15 @@ export class RegisterPage {
         try {
             const result = await this.ofAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
             console.log(result);
-            console.log(user);
             if (result) {
-            
-            this.navCtrl.setRoot(ProfilePage);
-            
-            } else if (typeof result == undefined) {
-                this.toast.create({
-                    message: `Wrong input`,
-                    duration: 3000
-                }).present();
-                
-            } else {
-                this.toast.create({
-                    message: `Cannot register at the moment`,
-                    duration: 3000
-                }).present();
+                this.navCtrl.setRoot(ProfilePage);
             }
         } catch (e) {
-            console.log("----");
             console.error(e);
+            this.toast.create({
+                    message: e.message,
+                    duration: 3000
+                }).present();
         }
     }
 }
