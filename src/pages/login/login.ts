@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { Firebase } from '@ionic-native/firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { User } from "../../modals/user";
@@ -17,7 +16,7 @@ import * as admin from "firebase-admin";
 export class LoginPage {
   user = {} as User;
 
-  constructor (private ofAuth: AngularFireAuth, private firebase: Firebase, private toast: ToastController, public navCtrl: NavController) {}
+  constructor (private ofAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController) {}
   
   async register () {
     this.navCtrl.push(RegisterPage);

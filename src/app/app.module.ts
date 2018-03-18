@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { Firebase } from '@ionic-native/firebase';
 import * as admin from "firebase-admin";
-var serviceAccount = require("../../resources/tourisa-628ef-firebase-adminsdk-mbdyn-726cd9a14e.json");
+var serviceAccount =  require("../../resources/tourisa-628ef-firebase-adminsdk-mbdyn-726cd9a14e.json");
 
 export const appConfig = {
     databaseURL: "https://tourisa-628ef.firebaseio.com",
@@ -31,6 +31,8 @@ export const appConfig = {
     storageBucket: "tourisa-628ef.appspot.com",
     messagingSenderId: "595936375688"
 };
+
+admin.initializeApp(appConfig);
 
 @NgModule({
   declarations: [

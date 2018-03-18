@@ -19,8 +19,7 @@ export class ProfilePage {
   
     createProfile() {
        this.ofAuth.authState.take(1).subscribe(auth => {
-           var uid = auth.uid;
-           this.afDatabase.list("users/" + uid).push(this.profile)
+           this.afDatabase.list("users/" + auth.uid).push(this.profile)
             .then(() => this.navCtrl.setRoot(HomePage));
        });
     }
