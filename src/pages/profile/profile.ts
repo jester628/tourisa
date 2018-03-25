@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -13,15 +13,24 @@ import { HomePage } from '../../pages/home/home';
 })
 
 export class ProfilePage {
-    profile = {} as Profile;
+    profile = {} as Profile; 
 
-    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams){ }
+    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams){ }
+    
   
     createProfile() {
-       this.ofAuth.authState.take(1).subscribe(auth => {
-           this.afDatabase.list("users/" + auth.uid).push(this.profile)
-            .then(() => this.navCtrl.setRoot(HomePage));
-       });
+       try {
+            this.ofAuth.authState.take(1).subscribe(auth => {
+              this.profile.customer = true;
+              this.afDatabase.list<Profile>(`users/${auth.uid}`).push(this.profile).then(() => 
+                 this.navCtrl.setRoot(HomePage));
+           })
+       } catch (e) {
+            this.toast.create({
+                message: e.message,
+                duration: 3000
+            }); 
+       }
     }
 }
 
