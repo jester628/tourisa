@@ -12,24 +12,20 @@ import { ProfilePage } from '../profile/profile';
 export class RegisterPage {
   user = {} as User;
   
-  constructor (private ofAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController) {
-    
-  
-  }
+  constructor (private ofAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController) {}
   
     async register(user: User) {
         try {
             const result = await this.ofAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-            console.log(result);
             if (result) {
-                this.navCtrl.setRoot(ProfilePage);
+                this.navCtrl.push(ProfilePage);  
             }
         } catch (e) {
             console.error(e);
             this.toast.create({
-                    message: e.message,
-                    duration: 3000
-                }).present();
+                message: e.message,
+                duration: 3000
+            }).present();
         }
     }
 }

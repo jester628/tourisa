@@ -3,5 +3,5 @@ export interface Profile {
     firstname: string;
     lastname: string;
     contactnum: number;
-    
+    customer: boolean;
 }

@@ -16,12 +16,12 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.spec.ts",
+    "src/**/__tests__/*.ts",
     "./node_modules/@types/node/index.d.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src/**/*.spec.ts",
-    "src/**/__tests__/*.ts"
+    "node_modules"
   ],
   "compileOnSave": false,
   "atom": {
