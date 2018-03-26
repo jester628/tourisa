@@ -18,8 +18,8 @@ export class ModalPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalPage');
+  async back() {
+  	this.navCtrl.pop();
   }
 
 }

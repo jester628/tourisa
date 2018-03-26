@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, ModalController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { LoginPage } from '../../pages/login/login';
 import { OrdersPage } from '../../pages/orders/orders';
-import { ProductsPage } from "../../pages/products/products";  
-import { Profile } from '../../modals/profile';
+import { ModalPage } from '../../pages/modal/modal';
+import { MenuProvider } from '../../providers/menu/menu';
 import * as firebase from 'firebase';
 
 @IonicPage()
@@ -15,8 +14,9 @@ import * as firebase from 'firebase';
 })
 
 export class HomePage {
-    
-    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, private navCtrl: NavController, private modalCtrl: ModalController) {
+    pasalubong: string = "food";
+
+    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, private navCtrl: NavController, private modalCtrl: ModalController, private menu: MenuProvider) {}
 
 
     ionViewWillLoad() {
@@ -32,19 +32,23 @@ export class HomePage {
         });
     }
 
-    async productsRedirect() {
-        this.navCtrl.setRoot(ProductsPage);
+    async click(){
+        this.modalCtrl.create(ModalPage).present();
     }
 
-    async ordersRedirect(){
-        this.navCtrl.setRoot(OrdersPage);
-    }
-    
-    async click(){
+    async presentModal(){
         this.modalCtrl.create(OrdersPage).present();
     }
 
-    async userMenu() {
+    async openMenu() {
+       this.menuCtrl.open();
+    }
+
+    async openPage(page) {
+        this.navCtrl.setRoot(page);
+    }
+
+    async closeMenu() {
 
     }
 
@@ -58,10 +62,6 @@ export class HomePage {
             console.error(e);
         }
     } 
-
-    async presentModal(){
-        this.modalCtrl.create(OrdersPage).present();
-    }
 }    
 
 

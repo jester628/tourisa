@@ -11,6 +11,7 @@ import { OrdersPage } from '../pages/orders/orders';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
+import { ModalPage } from '../pages/modal/modal';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -18,6 +19,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { Firebase } from '@ionic-native/firebase';
+import { MenuProvider } from '../providers/menu/menu';
 
 export const appConfig = {
     databaseURL: "https://tourisa-628ef.firebaseio.com",
@@ -36,7 +38,8 @@ export const appConfig = {
     OrdersPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    ModalPage
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,12 @@ export const appConfig = {
     HttpClientModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
+      menuType: 'push',
+      platforms: {
+        ios: {
+          menuType: 'overlay',
+        }
+      },
       backButtonText: 'Go Back',
       iconMode: 'ios',
       modalEnter: 'modal-slide-in',
@@ -62,13 +71,15 @@ export const appConfig = {
     OrdersPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    ModalPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Firebase,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MenuProvider
   ]
 })
 export class AppModule {}

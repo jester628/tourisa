@@ -3,7 +3,7 @@
 }
 
 .toolbar ion-title {
-    color: #FFFFFF;
+    color: #ffffff;
     text-align: center;
 }
 
@@ -24,7 +24,10 @@
 
 .content {
     background: #607D8B;
- 
+
+    ion-menu {
+      background: #ffffff;
+    }
     .logo-row {
       padding-top: 50px;
       padding-bottom: 20px;
