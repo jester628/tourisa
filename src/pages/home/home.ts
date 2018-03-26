@@ -3,12 +3,9 @@ import { IonicPage, NavController, ToastController, ModalController } from 'ioni
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { OrdersPage } from '../../pages/orders/orders';
-<<<<<<< HEAD
 import { Profile } from '../../modals/profile';
-=======
 import { ModalPage } from '../../pages/modal/modal';
 import { MenuProvider } from '../../providers/menu/menu';
->>>>>>> 3dbc4f6deeaa00045603cfa53d6e788e4ab8861d
 import * as firebase from 'firebase';
 
 @IonicPage()
