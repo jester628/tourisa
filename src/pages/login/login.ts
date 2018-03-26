@@ -5,6 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { User } from "../../modals/user";
 import { HomePage } from "../../pages/home/home";
 import { RegisterPage } from "../../pages/register/register";
+import { TabsPage } from "../../pages/tabs/tabs";
 import * as firebase from "firebase";
 
 @IonicPage()

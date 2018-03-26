@@ -4,7 +4,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { LoginPage } from '../../pages/login/login';
 import { OrdersPage } from '../../pages/orders/orders';
-import { ProductsPage } from "../../pages/products/products";  
 import { Profile } from '../../modals/profile';
 import * as firebase from 'firebase';
 
@@ -16,7 +15,7 @@ import * as firebase from 'firebase';
 
 export class HomePage {
     
-    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, private navCtrl: NavController, private modalCtrl: ModalController) {
+    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, private navCtrl: NavController, private modalCtrl: ModalController) { }
 
 
     ionViewWillLoad() {
@@ -33,7 +32,7 @@ export class HomePage {
     }
 
     async productsRedirect() {
-        this.navCtrl.setRoot(ProductsPage);
+        this.navCtrl.setRoot(HomePage);
     }
 
     async ordersRedirect(){
