@@ -10,35 +10,59 @@
 <ion-grid>
     <ion-row >
         <ion-col>
-            <img src="../assets/imgs/smallube.png" class = "productimg" alt = "smallubejam">
+            <img src="../assets/imgs/lenggua.png" class = "productimg" alt = "lenggua">
             <ion-item>
               <ion-icon name='pricetag' item-start ></ion-icon>
-                Small Ube Jam
+                Lenggua
                 <button ion-button item-end><ion-icon name="add"></ion-icon><ion-icon name="cart"></ion-icon></button>
                 <div><ion-badge>P130.00 </ion-badge></div>
             </ion-item>
         </ion-col>
         <ion-col>
-            <img src="../assets/imgs/smallube.png" class = "productimg" alt = "smallubejam">
+            <img src="../assets/imgs/ubejam.jpg" class = "productimg" alt = "ubejam">
             <ion-item>
               <ion-icon name='pricetag' item-start ></ion-icon>
-                Small Ube Jam
+                Ube Jam
                <button ion-button item-end><ion-icon name="add"></ion-icon><ion-icon name="cart"></ion-icon></button>
                <div><ion-badge>P130.00 </ion-badge></div>
             </ion-item>
         </ion-col>
         
         <ion-col>
-            <img src="../assets/imgs/smallube.png" class = "productimg" alt = "smallubejam">
+            <img src="../assets/imgs/peanutbrittle.jpg" class = "productimg" alt = "peanutbrittle">
             <ion-item>
               <ion-icon name='pricetag' item-start ></ion-icon>
-                Small Ube Jam
+                Peanut Brittle
                 <button ion-button item-end><ion-icon name="add"></ion-icon><ion-icon name="cart"></ion-icon></button>
                 <div><ion-badge>P130.00 </ion-badge></div>
             </ion-item>
         </ion-col>
+
+        <ion-col>
+            <img src="../assets/imgs/peanutbrittledurog.jpg" class = "productimg" alt = "peanutbrittledurog">
+            <ion-item>
+              <ion-icon name='pricetag' item-start ></ion-icon>
+                Peanut Brittle Durog
+                <button ion-button item-end><ion-icon name="add"></ion-icon><ion-icon name="cart"></ion-icon></button>
+                <div><ion-badge>P130.00 </ion-badge></div>
+            </ion-item>
+        </ion-col>
+
+         <ion-col>
+            <img src="../assets/imgs/peanutbrittlewhole.jpg" class = "productimg" alt = "peanutbrittlewhole">
+            <ion-item>
+              <ion-icon name='pricetag' item-start ></ion-icon>
+                Peanut Brittle Whole
+                <button ion-button item-end><ion-icon name="add"></ion-icon><ion-icon name="cart"></ion-icon></button>
+                <div><ion-badge>P130.00 </ion-badge></div>
+            </ion-item>
+        </ion-col>
+
     </ion-row>
 </ion-grid>
+
+<button ion-button (click)="productsRedirect()">Products</button>
+<button ion-button (click)="ordersRedirect()">Orders</button>
 </ion-content>
 
 <ion-nav [root]="rootPage"></ion-nav>

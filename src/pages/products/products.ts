@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
+import { OrdersPage } from '../../pages/orders/orders';  
 
 @IonicPage()
 @Component({
@@ -8,8 +9,14 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class ProductsPage {
 
-  constructor(public navCtrl: NavController) {
+	constructor(public navCtrl: NavController) { }
 
-  }
+	async productsRedirect() {
+		this.navCtrl.setRoot(ProductsPage);
+	}
 
+	async ordersRedirect() {
+		this.navCtrl.setRoot(OrdersPage);
+	}
 }
+

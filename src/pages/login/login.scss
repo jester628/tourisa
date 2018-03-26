@@ -1,4 +1,11 @@
-page-login {    
+page-login {
+   
+   .content {
+      .scroll-content {
+         overflow-y: hidden;
+      }
+   }
+
   .login-content {
     background: #607D8B;
  
