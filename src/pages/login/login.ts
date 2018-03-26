@@ -18,14 +18,18 @@ export class LoginPage {
   
   constructor (private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController) {}
 
+  async register () {
+    this.navCtrl.push(RegisterPage);
+  }
+
   matchingRole() {
     this.ofAuth.authState.take(1).subscribe(auth => {
       this.afDatabase.list(`users/${auth.uid}`).valueChanges().subscribe(snapshot => {
         snapshot.forEach(role => {
           if (role['customer'] === true) {
-              firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-              this.navCtrl.setRoot(HomePage);
-          } else if (role['customer'] === false){
+                this.navCtrl.setRoot(HomePage);
+
+          } else if (role['customer'] === false) {
               this.toast.create({
                     message: `Denied access`,
                     duration: 3000
@@ -34,25 +38,22 @@ export class LoginPage {
         });
       });
     });
-  }
-
-  async register () {
-    this.navCtrl.push(RegisterPage);
-  }
+  } 
   
   async login(user: User) {
     try {
       const result = await this.ofAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
         if (result) {
             this.matchingRole();
-        }   
+        }  
+      });
     } catch (e) {
         this.toast.create({
             message: e.message,
             duration: 3000
         }).present();
     }
-    
   }
 }
 

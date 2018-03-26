@@ -18,6 +18,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { Firebase } from '@ionic-native/firebase';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 export const appConfig = {
     databaseURL: "https://tourisa-628ef.firebaseio.com",
