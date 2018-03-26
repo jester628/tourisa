@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, ModalController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { LoginPage } from '../../pages/login/login';
-import * as firebase from "firebase";
+import { OrdersPage } from '../../pages/orders/orders';
+import { ProductsPage } from "../../pages/products/products";  
+import { Profile } from '../../modals/profile';
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -13,8 +16,8 @@ import * as firebase from "firebase";
 
 export class HomePage {
     
-    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, public toast: ToastController, private navCtrl: NavController) {
-    }
+    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, private navCtrl: NavController, private modalCtrl: ModalController) {
+
 
     ionViewWillLoad() {
         this.ofAuth.authState.take(1).subscribe(data => {
@@ -28,8 +31,24 @@ export class HomePage {
             });
         });
     }
+
+    async productsRedirect() {
+        this.navCtrl.setRoot(ProductsPage);
+    }
+
+    async ordersRedirect(){
+        this.navCtrl.setRoot(OrdersPage);
+    }
     
-    logout() {
+    async click(){
+        this.modalCtrl.create(OrdersPage).present();
+    }
+
+    async userMenu() {
+
+    }
+
+    async logout() {
         try {
             firebase.auth().signOut();
             console.log('User has logged off');
@@ -39,6 +58,10 @@ export class HomePage {
             console.error(e);
         }
     } 
+
+    async presentModal(){
+        this.modalCtrl.create(OrdersPage).present();
+    }
 }    
 
 
