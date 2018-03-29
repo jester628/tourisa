@@ -35,12 +35,11 @@ export class HomePage {
 
         this.afDatabase.list(`products`).valueChanges().subscribe(snapshot => {
             snapshot.forEach(productObj => {
-                console.log(productObj);
                 this.productArray.push(productObj);
             });
         });
 
-        return productArray;
+        return this.productArray;
     }
 
     async openMenu() {
@@ -74,11 +73,9 @@ export class HomePage {
         }
     }
 
-    async addCart(productName) {
-        productArray.forEach(product => {
-            if(product == productName) {
-                console.log(product);
-                console.log(productName);
+    async viewProduct(productName) {
+        this.productArray.forEach(product => {
+            if(product['name'] == productName) {
                 let modal = this.modalCtrl.create(AddCartPage, {name: product['name'], pic: product['pic'], price: product['price'], supplier: product['supplier']});
                 modal.onDidDismiss(data => {
                     console.log(data);

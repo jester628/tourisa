@@ -2,13 +2,13 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Tourisa</ion-title>
-    <button ion-button menuToggle start><ion-icon name ="menu"></ion-icon></button>
+    <button ion-button persistent= "true" menuToggle start><ion-icon name ="menu"></ion-icon></button>
   </ion-navbar>
 </ion-header>
 
 <ion-content class = "content" padding>
 
-<ion-menu type="overlay" class ="show-menu" [content]="content">
+<ion-menu persistent= "true" type="overlay" class ="show-menu" [content]="content">
   <ion-list>
     <button ion-item (click)="openOrders()">
       Orders
@@ -45,7 +45,7 @@
           <img src="{{ productItem['pic'] }}" class = "productimg" alt = "productimg">
         </ion-thumbnail>
         <ion-badge>{{ productItem['price'] }}</ion-badge>
-        <button ion-button item-end (click) = "addCart()"><ion-icon name="cart"></ion-icon></button>
+        <button ion-button item-end (click) = "viewProduct(productItem['name'])"><ion-icon name="cart"></ion-icon></button>
       </ion-item>
     </ion-list>
   </div>
