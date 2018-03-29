@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, ModalController, MenuController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { OrdersPage } from '../../pages/orders/orders';
-import { Profile } from '../../modals/profile';
-import { ModalPage } from '../../pages/modal/modal';
-import { MenuProvider } from '../../providers/menu/menu';
+import { LoginPage } from '../../pages/login/login';
+import { AddCartPage } from '../../pages/add-cart/add-cart';
+import { AccountPage } from '../../pages/account/account';
+import { FeedbackPage } from '../../pages/feedback/feedback';
 import * as firebase from 'firebase';
 
 @IonicPage()
@@ -16,8 +17,9 @@ import * as firebase from 'firebase';
 
 export class HomePage {
     pasalubong: string = "food";
+    public productArray: any = [];
 
-    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, private navCtrl: NavController, private modalCtrl: ModalController, private menu: MenuProvider) {}
+    constructor(public toast: ToastController, public navCtrl: NavController, private modalCtrl: ModalController, public menuCtrl: MenuController, private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {}
 
     ionViewWillLoad() {
         this.ofAuth.authState.take(1).subscribe(data => {
@@ -30,22 +32,35 @@ export class HomePage {
                 });
             });
         });
-    }
 
-    async presentModal(){
-        this.modalCtrl.create(OrdersPage).present();
+        this.afDatabase.list(`products`).valueChanges().subscribe(snapshot => {
+            snapshot.forEach(productObj => {
+                console.log(productObj);
+                this.productArray.push(productObj);
+            });
+        });
+
+        return productArray;
     }
 
     async openMenu() {
        this.menuCtrl.open();
     }
 
-    async openPage(page) {
-        this.navCtrl.setRoot(page);
+    async openOrders() {
+        this.navCtrl.push(OrdersPage);
+    }
+
+    async openAccount() {
+        this.navCtrl.push(AccountPage);
+    }
+
+    async openFeedback() {
+        this.navCtrl.push(FeedbackPage);
     }
 
     async closeMenu() {
-
+        this.menuCtrl.close();
     }
 
     async logout() {
@@ -57,7 +72,21 @@ export class HomePage {
         } catch (e) {
             console.error(e);
         }
-    } 
+    }
+
+    async addCart(productName) {
+        productArray.forEach(product => {
+            if(product == productName) {
+                console.log(product);
+                console.log(productName);
+                let modal = this.modalCtrl.create(AddCartPage, {name: product['name'], pic: product['pic'], price: product['price'], supplier: product['supplier']});
+                modal.onDidDismiss(data => {
+                    console.log(data);
+                });
+                modal.present();
+            }
+        });
+    }
 }    
 
 

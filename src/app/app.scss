@@ -1,15 +1,14 @@
 .toolbar-background {
-    background-color: #90A4AE;
+    background-color: #0288D1;
 }
+
+.arrowBack {
+    outline: none;  
+} 
 
 .toolbar ion-title {
     color: #ffffff;
     text-align: center;
-}
-
-.logoimg {
-    width: 50%;
-    height: 50%;
 }
 
 .logo-row {
@@ -23,11 +22,10 @@
 }
 
 .content {
-    background: #607D8B;
+    background-color: #03A9F4;
+    background-size: cover;
+    background-repeat: no-repeat;
 
-    ion-menu {
-      background: #ffffff;
-    }
     .logo-row {
       padding-top: 50px;
       padding-bottom: 20px;
@@ -52,6 +50,10 @@
          border-bottom: 0px !important;
          box-shadow: none !important;
      }
+
+     ion-badge {
+        background-color: #FFEB3B;
+     }
  
      .signup-col {
        margin: 0px 16px 0px 16px;
@@ -63,15 +65,13 @@
        box-shadow: none !important;
      }
  
-     .submit-btn {
-       background: #455a64;
-       border-radius: 30px !important;
-       border: 1px solid #ffffff;
-       color: #ffffff;
+     .btn waves-effect waves-light {
+       background-color: #FFEB3B;
+       color: #212121;
      }
  
      .register-btn {
-       color: #263238;
+       color: #212121;
        font-size: 0.8em;
      }
-  }
+}

@@ -6,12 +6,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
 import { OrdersPage } from '../pages/orders/orders';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { AccountPage } from '../pages/account/account';
+import { FeedbackPage } from '../pages/feedback/feedback';
+import { AddCartPage } from '../pages/add-cart/add-cart';
 import { ProfilePage } from '../pages/profile/profile';
-import { ModalPage } from '../pages/modal/modal';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -32,13 +33,14 @@ export const appConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    TabsPage,    
     HomePage,
     OrdersPage,
     LoginPage,
     RegisterPage,
+    AccountPage,
+    FeedbackPage,
     ProfilePage,
-    ModalPage
+    AddCartPage
   ],
   imports: [
     BrowserModule,
@@ -65,20 +67,20 @@ export const appConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TabsPage,
     HomePage,
     OrdersPage,
     LoginPage,
     RegisterPage,
+    AccountPage,
+    FeedbackPage,
     ProfilePage,
-    ModalPage
+    AddCartPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MenuProvider
   ]
 })
 export class AppModule {}

@@ -1,25 +1,2 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> <meta name="format-detection" content="telephone=no"> <meta name="msapplication-tap-highlight" content="no"> <link ios-href="build/css/app.ios.css" rel="stylesheet"> <link md-href="build/css/app.md.css" rel="stylesheet"> <link wp-href="build/css/app.wp.css" rel="stylesheet">
-
-<ion-nav [root]="rootPage"></ion-nav>
-
-<ion-menu type="overlay" class ="menu" [content]="content">
-<ion-content>
-  <ion-list>
-    <button ion-item (click)="openPage(HomePage)">
-      Home
-    </button>
-    <button ion-item (click)="openPage(OrdersPage)">
-      Orders
-    </button>
-    <button ion-item (click)="openPage(HomePage)">
-      Account
-    </button>
-    <button ion-item (click)="logout()">
-      Logout
-    </button>
-    <button ion-item (click)="closeMenu()">
-      Close Menu
-    </button>
-  </ion-list>
-</ion-content>
-</ion-menu>
+<ion-nav #content [root]="rootPage"></ion-nav>

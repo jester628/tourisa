@@ -5,7 +5,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { User } from "../../modals/user";
 import { HomePage } from "../../pages/home/home";
 import { RegisterPage } from "../../pages/register/register";
-import { TabsPage } from "../../pages/tabs/tabs";
 import * as firebase from "firebase";
 
 @IonicPage()
@@ -29,7 +28,6 @@ export class LoginPage {
         snapshot.forEach(role => {
           if (role['customer'] === true) {
                 this.navCtrl.setRoot(HomePage);
-
           } else if (role['customer'] === false) {
               this.toast.create({
                     message: `Denied access`,

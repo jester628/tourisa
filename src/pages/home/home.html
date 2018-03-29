@@ -2,34 +2,21 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Tourisa</ion-title>
-    <button ion-button menuToggle><ion-icon name ="menu"></ion-icon></button>
+    <button ion-button menuToggle start><ion-icon name ="menu"></ion-icon></button>
   </ion-navbar>
 </ion-header>
 
 <ion-content class = "content" padding>
-  <ion-row class="logo-row">
-    <ion-col></ion-col>
-    <ion-col width-67>
-      <img src = "../assets/imgs/salubong.png" class ="loginimg" >
-    </ion-col>
-    <ion-col></ion-col>
-  </ion-row>
 
-<ion-nav #content [root]="rootPage"></ion-nav>
-
-<ion-menu type="overlay" class ="menu" [content]="content">
-<ion-content>
+<ion-menu type="overlay" class ="show-menu" [content]="content">
   <ion-list>
-    <button ion-item (click)="openPage(HomePage)">
-      Home
-    </button>
-    <button ion-item (click)="openPage(OrdersPage)">
+    <button ion-item (click)="openOrders()">
       Orders
     </button>
-    <button ion-item (click)="openPage(HomePage)">
+    <button ion-item (click)="openAccount()">
       Account
     </button>
-    <button ion-item (click)="sendFeedback()">
+    <button ion-item (click)="openFeedback()">
       Feedback
     </button>
     <button ion-item (click)="logout()">
@@ -39,79 +26,29 @@
       Close Menu
     </button>
   </ion-list>
-</ion-content>
 </ion-menu>
 
-<ion-content>
   <div padding>
     <ion-segment [(ngModel)]="pasalubong">
       <ion-segment-button value="food">
         Food
-      </ion-segment-button>
-      <ion-segment-button value="products">
-        Handmade Products
       </ion-segment-button>
     </ion-segment>
   </div>
 
   <div [ngSwitch]="pasalubong">
     <ion-list *ngSwitchCase="'food'">
-      <ion-item>
-        <h2>Lenggua</h2>
+      <ion-item *ngFor="let productItem of productArray">
+        <h2>{{ productItem['name'] }}</h2>
+        <p>{{ productItem['supplier'] }}</p>
         <ion-thumbnail item-start>
-          <img src="../assets/imgs/products/lenggua.jpg" class = "productimg" alt = "lenggua">
+          <img src="{{ productItem['pic'] }}" class = "productimg" alt = "productimg">
         </ion-thumbnail>
-        <ion-badge color = "dark">P130.00 </ion-badge>
-        <button item-end ion-button color = "dark"><ion-icon name="cart"></ion-icon></button>
-      </ion-item>
-
-      <ion-item>
-        <h2>Ube Jam</h2>
-        <ion-thumbnail item-start>
-          <img src="../assets/imgs/products/ubejam.jpg" class = "productimg" alt = "ubejam">
-        </ion-thumbnail>
-        <ion-badge color = "dark">P130.00 </ion-badge>
-        <button item-end ion-button color = "dark"><ion-icon name="cart"></ion-icon></button>
-      </ion-item>
-
-      <ion-item>
-        <h2>Peanut Brittle</h2>
-        <ion-thumbnail item-start>
-          <img src="../assets/imgs/products/peanutbrittle.jpg" class = "productimg" alt = "peanutbrittle">
-        </ion-thumbnail>
-        <ion-badge color = "dark">P130.00 </ion-badge>
-        <button item-end ion-button color = "dark"><ion-icon name="cart"></ion-icon></button>
-      </ion-item>
-
-      <ion-item>
-        <h2>Peanut Brittle (Durog)</h2>
-        <ion-thumbnail item-start>
-          <img src="../assets/imgs/products/peanutbrittledurog.jpg" class = "productimg" alt = "peanutbrittledurog">
-        </ion-thumbnail>
-        <ion-badge color = "dark">P130.00 </ion-badge>
-        <button item-end ion-button color = "dark"><ion-icon name="cart"></ion-icon></button>
-      </ion-item>
-
-      <ion-item>
-        <h2>Peanut Brittle (Whole)</h2>
-        <ion-thumbnail item-start>
-          <img src="../assets/imgs/products/peanutbrittlewhole.jpg" class = "productimg" alt = "peanutbrittlewhole">
-        </ion-thumbnail>
-        <ion-badge color = "dark">P130.00 </ion-badge>
-        <button item-end ion-button color = "dark"><ion-icon name="cart"></ion-icon></button>
-      </ion-item>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'products'">
-      <ion-item>
-        <h2>Lenggua</h2>
-        <ion-thumbnail item-start>
-          <img src="../assets/imgs/products/lenggua.png" class = "productimg" alt = "lenggua">
-        </ion-thumbnail>
-        <ion-badge color = "dark">P130.00 </ion-badge>
-        <button item-end ion-button color = "dark"><ion-icon name="cart"></ion-icon></button>
+        <ion-badge>{{ productItem['price'] }}</ion-badge>
+        <button ion-button item-end (click) = "addCart()"><ion-icon name="cart"></ion-icon></button>
       </ion-item>
     </ion-list>
   </div>
  </ion-content>
+ <ion-nav #content [root]="rootPage"></ion-nav>
 </html>

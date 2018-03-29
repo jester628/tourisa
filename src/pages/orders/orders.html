@@ -1,21 +1,43 @@
+<html>
 <ion-header>
   <ion-navbar>
-    <ion-title>
-        <img src = "../assets/imgs/tourisalogo.png" class = "logoimg">
-    </ion-title>
+    <ion-title>Tourisa</ion-title>
+    <button ion-button menuToggle start>
+      <ion-icon name ="menu"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-	<ion-grid>
-		<ion-col>
+<ion-content class = "content" padding>
+	<ion-menu type="overlay" class ="show-menu" [content]="content">
+  <ion-list>
+    <button ion-item (click)="openOrders()">
+      Orders
+    </button>
+    <button ion-item (click)="openAccount()">
+      Account
+    </button>
+    <button ion-item (click)="openFeedback()">
+      Feedback
+    </button>
+    <button ion-item (click)="logout()">
+      Logout
+    </button>
+    <button ion-item (click)="closeMenu()">
+      Close Menu
+    </button>
+  </ion-list>
+</ion-menu>
+
+  <ion-grid>
+	<ion-col>
 	<div class="row header">
           <div class="col">Date</div>
           <div class="col">Time</div>
           <div class="col">Place</div>
           <div class="col">Cost</div>
         </div>
-    </ion-col>
+  </ion-col>
 </ion-grid>
 	<ion-grid>
 		<ion-col>
@@ -28,5 +50,5 @@
     </ion-col>
 </ion-grid>
 </ion-content>
-
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-nav #content [root]="rootPage"></ion-nav>
+</html>
