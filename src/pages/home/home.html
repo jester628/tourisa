@@ -1,54 +1,52 @@
-<html>
 <ion-header>
   <ion-navbar>
     <ion-title>Tourisa</ion-title>
-    <button ion-button persistent= "true" menuToggle start><ion-icon name ="menu"></ion-icon></button>
+    <button ion-button menuToggle name = "menuBtn">
+      <ion-icon name ="menu"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 
-<ion-content class = "content" padding>
+<ion-nav #content [root]="rootPage"></ion-nav>
 
-<ion-menu persistent= "true" type="overlay" class ="show-menu" [content]="content">
-  <ion-list>
-    <button ion-item (click)="openOrders()">
-      Orders
-    </button>
-    <button ion-item (click)="openAccount()">
-      Account
-    </button>
-    <button ion-item (click)="openFeedback()">
-      Feedback
-    </button>
-    <button ion-item (click)="logout()">
-      Logout
-    </button>
-    <button ion-item (click)="closeMenu()">
-      Close Menu
-    </button>
-  </ion-list>
-</ion-menu>
-
-  <div padding>
-    <ion-segment [(ngModel)]="pasalubong">
-      <ion-segment-button value="food">
-        Food
-      </ion-segment-button>
-    </ion-segment>
-  </div>
-
-  <div [ngSwitch]="pasalubong">
-    <ion-list *ngSwitchCase="'food'">
-      <ion-item *ngFor="let productItem of productArray">
-        <h2>{{ productItem['name'] }}</h2>
-        <p>{{ productItem['supplier'] }}</p>
-        <ion-thumbnail item-start>
-          <img src="{{ productItem['pic'] }}" class = "productimg" alt = "productimg">
-        </ion-thumbnail>
-        <ion-badge>{{ productItem['price'] }}</ion-badge>
-        <button ion-button item-end (click) = "viewProduct(productItem['name'])"><ion-icon name="cart"></ion-icon></button>
-      </ion-item>
+<ion-content class = "myContent" padding>
+  <ion-menu type="overlay" class ="show-menu" [content]="content">
+    <ion-list>
+      <button ion-item (click)="openOrders()">
+        Orders
+      </button>
+      <button ion-item (click)="openAccount()">
+        Account
+      </button>
+      <button ion-item (click)="openFeedback()">
+        Feedback
+      </button>
+      <button ion-item (click)="logout()">
+        Logout
+      </button>
+      <button ion-item (click)="closeMenu()">
+        Close Menu
+      </button>
     </ion-list>
-  </div>
- </ion-content>
- <ion-nav #content [root]="rootPage"></ion-nav>
-</html>
+  </ion-menu>
+
+  <ion-list name = "productList" class = "productList">
+    <ion-item *ngFor="let productItem of productArray">
+      <h2>{{ productItem['name'] }}</h2>
+      <p>{{ productItem['supplier'] }}</p>
+      <ion-thumbnail item-start>
+        <img src="{{ productItem['pic'] }}" class = "productimg" alt = "productimg">
+      </ion-thumbnail>
+      <ion-badge>{{ productItem['price'] }}</ion-badge>
+      <button ion-button [disabled]="isenabled" item-end class = "cartBtn" name = "cartBtn" (click) = "viewProduct(productItem['name'])">
+        <ion-icon name="basket"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+ <ion-fab right bottom>
+   <button ion-fab (click) = "checkout()">
+    <ion-icon name="cart"></ion-icon>
+   </button>
+ </ion-fab>
+</ion-content>

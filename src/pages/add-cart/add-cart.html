@@ -6,15 +6,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class = "content" padding>
-<div class = "login-box"padding>
+<ion-content class = "myContent" padding>
+<div class = "login-box" padding>
 	<h2>{{ this.navParams.get('name') }}</h2>
     <p>{{ this.navParams.get('supplier') }}</p>
     <ion-badge>{{ this.navParams.get('price') }}</ion-badge>
     <img src="{{ this.navParams.get('pic') }}" class = "productimg" alt = "productimg">
-    <ion-input type="number" name ="quantity" placeholder="quantity" min= "0" max="10"  pattern="[0-10]" [(ngModel)]="product.quantity"> </ion-input>
+    <ion-input type="text" name ="quantity" placeholder="quantity" [(ngModel)]="product.quantity"> </ion-input>
     <button ion-button (click) = "addToCart()">Add to cart</button>
-	</div>
+</div>
 </ion-content>
-<ion-nav #content [root]="rootPage"></ion-nav>
 </html>

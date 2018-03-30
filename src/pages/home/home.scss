@@ -12,4 +12,12 @@ page-home {
         color: white;
         text-emphasis-style: none;
     }
+
+    ion-menu[side="left"] > .menu-inner {
+    	width: 75%;
+    }
+
+    .cartBtn {
+    	z-index: 1000;
+    }
 }

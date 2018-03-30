@@ -13,6 +13,7 @@ import { AccountPage } from '../pages/account/account';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { AddCartPage } from '../pages/add-cart/add-cart';
 import { ProfilePage } from '../pages/profile/profile';
+import { CheckoutPage } from '../pages/checkout/checkout';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -40,7 +41,8 @@ export const appConfig = {
     AccountPage,
     FeedbackPage,
     ProfilePage,
-    AddCartPage
+    AddCartPage,
+    CheckoutPage
   ],
   imports: [
     BrowserModule,
@@ -50,9 +52,11 @@ export const appConfig = {
     HttpClientModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
-      menuType: 'push',
       platforms: {
         ios: {
+          menuType: 'overlay',
+        },
+        android: {
           menuType: 'overlay',
         }
       },
@@ -60,8 +64,7 @@ export const appConfig = {
       iconMode: 'ios',
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out',
-      tabsPlacement: 'bottom',
-      pageTransition: 'ios-transition'
+      pageTransition: 'md-transition'
     },
   )],
   bootstrap: [IonicApp],
@@ -74,7 +77,8 @@ export const appConfig = {
     AccountPage,
     FeedbackPage,
     ProfilePage,
-    AddCartPage
+    AddCartPage,
+    CheckoutPage
   ],
   providers: [
     StatusBar,

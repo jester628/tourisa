@@ -3,5 +3,5 @@ export interface Product {
     price: string;
     pic: string;
     supplier: string;
-    quantity: number;
+    quantity: string;
 }

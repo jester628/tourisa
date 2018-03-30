@@ -7,6 +7,7 @@ import { LoginPage } from '../../pages/login/login';
 import { AddCartPage } from '../../pages/add-cart/add-cart';
 import { AccountPage } from '../../pages/account/account';
 import { FeedbackPage } from '../../pages/feedback/feedback';
+import { CheckoutPage } from '../../pages/checkout/checkout';
 import * as firebase from 'firebase';
 
 @IonicPage()
@@ -16,12 +17,20 @@ import * as firebase from 'firebase';
 })
 
 export class HomePage {
-    pasalubong: string = "food";
     public productArray: any = [];
+    private isEnabled: boolean = false;
 
     constructor(public toast: ToastController, public navCtrl: NavController, private modalCtrl: ModalController, public menuCtrl: MenuController, private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {}
 
     ionViewWillLoad() {
+        this.menuCtrl.close();
+
+        this.afDatabase.list(`products`).valueChanges().subscribe(snapshot => {
+            snapshot.forEach(productObj => {
+                this.productArray.push(productObj);
+            });
+        });
+
         this.ofAuth.authState.take(1).subscribe(data => {
             this.afDatabase.list(`users/${data.uid}`).valueChanges().subscribe(snapshot => {
                 snapshot.forEach (item => {
@@ -33,16 +42,11 @@ export class HomePage {
             });
         });
 
-        this.afDatabase.list(`products`).valueChanges().subscribe(snapshot => {
-            snapshot.forEach(productObj => {
-                this.productArray.push(productObj);
-            });
-        });
-
         return this.productArray;
     }
 
     async openMenu() {
+       this.isEnabled = true;
        this.menuCtrl.open();
     }
 
@@ -59,6 +63,7 @@ export class HomePage {
     }
 
     async closeMenu() {
+        this.isEnabled = false;
         this.menuCtrl.close();
     }
 
@@ -76,13 +81,21 @@ export class HomePage {
     async viewProduct(productName) {
         this.productArray.forEach(product => {
             if(product['name'] == productName) {
-                let modal = this.modalCtrl.create(AddCartPage, {name: product['name'], pic: product['pic'], price: product['price'], supplier: product['supplier']});
-                modal.onDidDismiss(data => {
+                let modalProduct = this.modalCtrl.create(AddCartPage, {name: product['name'], pic: product['pic'], price: product['price'], supplier: product['supplier']});
+                modalProduct.onDidDismiss(data => {
                     console.log(data);
                 });
-                modal.present();
+                modalProduct.present();
             }
         });
+    }
+
+    async checkout() {
+        let modalCheckout = this.modalCtrl.create(CheckoutPage);
+        modalCheckout.onDidDismiss(data => {
+            console.log(data);
+        });
+        modalCheckout.present();
     }
 }    
 

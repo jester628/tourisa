@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { User } from "../../modals/user";
@@ -15,8 +15,27 @@ import * as firebase from "firebase";
 
 export class LoginPage {
   user = {} as User;
-  
-  constructor (private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController) {}
+  public progressBarLoader : any;
+
+  constructor (private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController, public loadingCtrl: LoadingController) {}
+
+  showLoader(timeInMilliseconds) {
+    let progressBarLoader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: timeInMilliseconds
+    });
+    progressBarLoader.present();
+  }
+
+  hideLoader(){
+    try{
+      if(this.progressBarLoader != null || this.progressBarLoader != undefined){
+        this.progressBarLoader.dismiss();
+      }
+    }catch(e){      
+      console.log("Busy Indecator not showing :: " + e.message);
+    }
+  }
 
   async register () {
     this.navCtrl.push(RegisterPage);

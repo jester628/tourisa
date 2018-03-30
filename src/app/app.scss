@@ -1,77 +1,77 @@
 .toolbar-background {
-    background-color: #0288D1;
+  background-color: #0288D1;
 }
 
 .arrowBack {
-    outline: none;  
+  outline: none;  
 } 
 
 .toolbar ion-title {
-    color: #ffffff;
-    text-align: center;
+  color: #ffffff;
+  text-align: center;
 }
 
 .logo-row {
-    padding-top: 50px;
-    padding-bottom: 20px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
  
 .logo-row ion-row {
-     align-items: center;
-     text-align: center;
+   align-items: center;
+   text-align: center;
 }
 
-.content {
-    background-color: #03A9F4;
-    background-size: cover;
-    background-repeat: no-repeat;
+.myContent {
+  background-color: #03A9F4;
+  background-size: cover;
+  background-repeat: no-repeat;
 
-    .logo-row {
-      padding-top: 50px;
-      padding-bottom: 20px;
-    }
- 
-    .login-box {
-      background: #CFD8DC;
-      padding: 20px 20px 0px 20px;
-      margin-top: 30px;
-    }
- 
-    ion-row {
-       align-items: center;
-       text-align: center;
-     }
- 
-     ion-item {
-         border-radius: 30px !important;
-         padding-left: 30px !important;
-         font-size: 0.9em;
-         margin-bottom: 10px;
-         border-bottom: 0px !important;
-         box-shadow: none !important;
-     }
+  .logo-row {
+    padding-top: 50px;
+    padding-bottom: 20px;
+  }
 
-     ion-badge {
-        background-color: #FFEB3B;
-     }
- 
-     .signup-col {
-       margin: 0px 16px 0px 16px;
-       padding-bottom: 20px;
-     }
- 
-     .item-inner {
-       border-bottom-color: #ffffff !important;
-       box-shadow: none !important;
-     }
- 
-     .btn waves-effect waves-light {
-       background-color: #FFEB3B;
-       color: #212121;
-     }
- 
-     .register-btn {
-       color: #212121;
-       font-size: 0.8em;
-     }
+  .login-box {
+    background: #CFD8DC;
+    padding: 20px 20px 0px 20px;
+    margin-top: 30px;
+  }
+
+  ion-row {
+    align-items: center;
+    text-align: center;
+  }
+
+   ion-item {
+    border-radius: 30px !important;
+    padding-left: 30px !important;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    border-bottom: 0px !important;
+    box-shadow: none !important;
+   }
+
+   ion-badge {
+      background-color: #FFEB3B;
+   }
+
+   .signup-col {
+     margin: 0px 16px 0px 16px;
+     padding-bottom: 20px;
+   }
+
+   .item-inner {
+     border-bottom-color: #ffffff !important;
+     box-shadow: none !important;
+   }
+
+   .btn waves-effect waves-light {
+     background-color: #FFEB3B;
+     color: #212121;
+   }
+
+   .register-btn {
+     color: #212121;
+     font-size: 0.8em;
+   }
 }
