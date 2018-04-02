@@ -2,7 +2,7 @@
 <ion-header>
   <ion-navbar>
   	<button ion-button left class = "arrowBack" (click) = "dismiss()"><ion-icon name ="arrow-round-back"></ion-icon>GO BACK</button>
-    <ion-title>Tourisa</ion-title>
+    <ion-title>Salubong</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,7 +12,10 @@
     <p>{{ this.navParams.get('supplier') }}</p>
     <ion-badge>{{ this.navParams.get('price') }}</ion-badge>
     <img src="{{ this.navParams.get('pic') }}" class = "productimg" alt = "productimg">
-    <ion-input type="text" name ="quantity" placeholder="quantity" [(ngModel)]="product.quantity"> </ion-input>
+
+    <button ion-fab mini>-</button> <ion-input type="text" name ="quantity" placeholder="quantity" [(ngModel)]="product.quantity"> </ion-input><button ion-fab mini>+</button>
+   
+    
     <button ion-button (click) = "addToCart()">Add to cart</button>
 </div>
 </ion-content>
