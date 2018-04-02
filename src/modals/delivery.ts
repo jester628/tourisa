@@ -1,5 +1,8 @@
 export interface Delivery {
-	place: String;
-	date: String;
-	time: String;
+	place: string;
+	date: string;
+	time: string;
+	confirmation: boolean;
+	delivered: boolean;
+	request: boolean;
 }

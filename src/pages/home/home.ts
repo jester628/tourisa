@@ -30,7 +30,7 @@ export class HomePage {
         });
 
         this.ofAuth.authState.take(1).subscribe(data => {
-            this.afDatabase.list(`users/${data.uid}`).valueChanges().subscribe(snapshot => {
+            this.afDatabase.list(`users/${data.uid}`).valueChanges().take(1).subscribe(snapshot => {
                 snapshot.forEach (item => {
                     this.toast.create({
                         message: `Welcome to Tourisa, ${item['username']}`,

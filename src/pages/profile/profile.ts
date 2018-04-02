@@ -20,24 +20,12 @@ export class ProfilePage {
   
     createProfile() {
        try {
-          var username = this.profile['username'];
-          var firstname = this.profile['firstname'];
-          var lastname = this.profile['lastname'];
-          var contactnum = this.profile['contactnum'];
-          
-         if (username != null && firstname != null && lastname != null && contactnum != null) {
-            this.ofAuth.authState.subscribe(auth => {
-                this.profile.customer = true;
-                this.afDatabase.list<Profile>(`users/${auth.uid}`).push(this.profile).then(() => {
-                  this.navCtrl.setRoot(HomePage)
-                });
-            });
-         } else {
-            this.toast.create({
-              message: 'Please fill up all profile details',
-              duration: 3000
-            }).present(); 
-         }
+          this.ofAuth.authState.take(1).subscribe(auth => {
+              this.profile.customer = true;
+              this.afDatabase.list<Profile>(`users/${auth.uid}`).push(this.profile).then(() => {
+                this.navCtrl.setRoot(HomePage)
+              });
+          });
        } catch (e) {
             this.toast.create({
                 message: e.message,

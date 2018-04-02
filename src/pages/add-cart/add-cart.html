@@ -1,30 +1,28 @@
-<html>
 <ion-header>
-  <ion-navbar>
-     <ion-buttons left>
-            <button ion-button icon-only (click)="viewCtrl.dismiss()">
-                <ion-icon name="arrow-round-back"></ion-icon>
-            </button>
-        </ion-buttons>
-    <ion-title>Cart</ion-title>
-  </ion-navbar>
+<ion-navbar>
+<ion-title>Cart</ion-title>
+ <ion-buttons left>
+    <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+</ion-buttons>
+</ion-navbar>
 </ion-header>
 
 <ion-content class = "myContent" padding>
-<div class = "login-box" padding>
-	<h2>{{ this.navParams.get('name') }}</h2>
-    <p>{{ this.navParams.get('supplier') }}</p>
-    <ion-badge>{{ this.navParams.get('price') }}</ion-badge>
-    <img src="{{ this.navParams.get('pic') }}" class = "productimg" alt = "productimg">
+    <div class = "login-box" padding>
+        <h2>{{ this.navParams.get('name') }}</h2>
+        <p>{{ this.navParams.get('supplier') }}</p>
+        <ion-badge>{{ this.navParams.get('price') }}</ion-badge>
+        <img src="{{ this.navParams.get('pic') }}" class = "productimg" alt = "productimg">
 
-    <ion-row>
-    <ion-label><h5>Quantity</h5></ion-label>
-    <ion-col width-50 style="text-align: left"><button ion-fab mini (click) = "decrease(product.quantity)">-</button></ion-col>
-    <ion-input type="text" name ="quantity" value = "0" [(ngModel)]="product.quantity"> </ion-input>
-    <ion-col width-50 style="text-align: right"><button ion-fab mini (click) = "increase(product.quantity)">+</button></ion-col>
-    </ion-row>
-    
-    <button ion-button (click) = "addToCart()">Add to cart</button>
-</div>
+        <ion-row>
+        <ion-label><h5>Quantity</h5></ion-label>
+        <ion-col width-50 style="text-align: left"><button ion-fab mini (click) = "decrease(product.quantity)">-</button></ion-col>
+        <ion-input type="text" name ="quantity" value = "0" [(ngModel)]="product.quantity"> </ion-input>
+        <ion-col width-50 style="text-align: right"><button ion-fab mini (click) = "increase(product.quantity)">+</button></ion-col>
+        </ion-row>
+
+        <button ion-button (click) = "addToCart()">Add to cart</button>
+    </div>
 </ion-content>
-</html>

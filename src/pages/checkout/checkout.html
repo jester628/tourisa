@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-  	 <ion-buttons left>
-            <button ion-button icon-only (click)="viewCtrl.dismiss()">
-                <ion-icon name="arrow-round-back"></ion-icon>
-            </button>
-        </ion-buttons>
     <ion-title>Checkout</ion-title>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+	</ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -49,7 +49,7 @@
 
 		<ion-item>
 		<ion-label>Date</ion-label>	
-		<ion-datetime displayFormat="MMM-D" pickerFormat="MMM D" min = "{{ minDate }}" max ="{{ maxDate }}" [(ngModel)]="delivery.date" name="date" required> </ion-datetime>
+		<ion-datetime displayFormat="MMM/DD/YYYY" pickerFormat="MMM D" min = "{{ minDate }}" max ="{{ maxDate }}" [(ngModel)]="delivery.date" name="date" required> </ion-datetime>
 		</ion-item>
 
 		<ion-item>

@@ -10,24 +10,12 @@
   <button ion-item *ngFor="let detail of meetingArray" (click) = "orderDetails()">
     <h2>{{ detail['date'] }}</h2>
     <p>{{ detail['place'] }} • {{ detail['time'] }}</p>
-    <ion-badge *ngIf="confirmation == true">Order is confirmed</ion-badge>
-    <ion-badge *ngIf="confirmation == null">Order has not been confirmed yet</ion-badge>
-    <ion-badge *ngIf="confirmation == false">No stock</ion-badge>
+    <ion-badge *ngIf="confirmationValue == true && requestValue == true">Order is confirmed</ion-badge>
+    <ion-badge *ngIf="confirmationValue == false && requestValue == true">Order has not been confirmed yet</ion-badge>
+    <ion-badge *ngIf="confirmationValue == false && requestValue == false">No stock</ion-badge>
     <ion-icon item-end name = "arrow-forward"></ion-icon>
   </button>
 </ion-list>
-
-<h2 *ngIf="meetingArray == null">No orders at the moment</h2>
-
-<!-- <h2> Past Orders </h2>
-<ion-list>
-<button ion-item>
-  <h2></h2>
-  <p></p>
-  <ion-icon item-end name = "arrow-forward"></ion-icon>
-</button>
-<h2 *ngIf="meetingArray != null">No orders at the moment</h2>
-</ion-list> --> 
 </ion-content>
 
 <ion-nav #content [root]="rootPage"></ion-nav>

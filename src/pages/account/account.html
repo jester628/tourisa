@@ -8,20 +8,23 @@
 
 
 <ion-content class = "myContent" padding>
-<ion-list>
-  <ion-item-sliding *ngFor="let info of acctArray">
+  <ion-list inset *ngFor="let info of acctArray">
+    <ion-label>Username</ion-label>
     <ion-item>
-      <h2>{{ info['username'] }}</h2>
-      <p>{{ info['firstname'] }}</p>
-      <p>{{ info['lastname'] }}</p>
-      <p>{{ info['contactnum'] }}</p>
+      <ion-input type="text" id = "username" name="username" value= "{{ info['username'] }}" disabled="true" [(ngModel)]="profile.username" required></ion-input>
     </ion-item>
-    <ion-item-options side="right">
-      <button ion-button color="primary" (click) = "editAcct()">
-        <ion-icon name="hammer"></ion-icon>
-        Edit
-      </button>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-list>
+    <ion-label>First Name</ion-label>
+    <ion-item>
+      <ion-input type="text" name="firstname" value= "{{ info['firstname'] }}" disabled="true" [(ngModel)]="profile.firstname" required></ion-input>
+    </ion-item>
+    <ion-label>Last Name</ion-label>
+     <ion-item>
+      <ion-input type="text" name="lastname" value= "{{ info['lastname'] }}" disabled="true" [(ngModel)]="profile.lastname" required></ion-input>
+    </ion-item>
+    <ion-label>Contact Number</ion-label>
+     <ion-item>
+      <ion-input type="text" name="contactnum" value= "{{ info['contactnum'] }}" disabled="true" [(ngModel)]="profile.contactnum" required></ion-input>
+    </ion-item>
+  </ion-list>
+<!--   <button ion-button class="submit-btn" full type="submit" (click) = "newProfile()">Submit New Profile</button> -->
 </ion-content>

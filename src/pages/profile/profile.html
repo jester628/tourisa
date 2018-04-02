@@ -1,39 +1,38 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-        
+     Profile
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class = "myContent">
   <ion-row class="logo-row">
-  <ion-col></ion-col>
-  <ion-col width-67>
-    <img src = "../assets/imgs/tourisalogo.png" class ="loginimg" >
-  </ion-col>
-  <ion-col></ion-col>
+    <ion-col></ion-col>
+    <ion-col width-67>
+      <img src = "../../assets/imgs/salubong.png" class ="loginimg" >
+    </ion-col>
+    <ion-col></ion-col>
   </ion-row>
-
    <div class="login-box">
     <form>
       <ion-row>
         <ion-col>
           <ion-list inset>
             <ion-item>
-              <ion-input type="text" name="username" [(ngModel)]="profile.username" required></ion-input>
+              <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="profile.username" required></ion-input>
             </ion-item>
               
             <ion-item>
-              <ion-input type="text" name="firstname" [(ngModel)]="profile.firstname" required></ion-input>
+              <ion-input type="text" placeholder="Firstname" name="firstname" [(ngModel)]="profile.firstname" required></ion-input>
             </ion-item>
             
             <ion-item>
-              <ion-input type="text" name="lastname" [(ngModel)]="profile.lastname" required></ion-input>
+              <ion-input type="text" placeholder="Lastname" name="lastname" [(ngModel)]="profile.lastname" required></ion-input>
             </ion-item>
               
             <ion-item>
-              <ion-input type="text" name="contactnum" [(ngModel)]="profile.contactnum" required></ion-input>
+              <ion-input type="text" placeholder="Contact Number" name="contactnum" [(ngModel)]="profile.contactnum" required></ion-input>
             </ion-item>
           </ion-list>
         </ion-col>

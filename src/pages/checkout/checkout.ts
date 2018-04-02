@@ -65,7 +65,8 @@ export class CheckoutPage {
 	}	
 
 	ionViewWillLoad() {
-		var returnOrder = this.checkOrder();
+		this.checkOrder();
+		console.log(this.orderExists);
 		this.ofAuth.authState.take(1).subscribe(auth => {
             this.afDatabase.list(`cart/${auth.uid}`).valueChanges().subscribe(snapshot => {
                 snapshot.forEach(product => {
@@ -82,7 +83,7 @@ export class CheckoutPage {
                 this.serviceFee = this.itemTotal*0.10;
                 this.orderTotal = this.itemTotal + this.serviceFee;
                 this.orderSummary.push({ItemTotal: this.itemTotal, ServiceFee: this.serviceFee, OrderTotal: this.orderTotal});
-                this.checkQuantity(this.quantityTotal, returnOrder);
+                this.checkQuantity(this.quantityTotal, this.orderExists);
             });
         });
 	}
@@ -93,11 +94,13 @@ export class CheckoutPage {
 			var place = this.delivery['place'];
 			var date = this.delivery['date'];
 			var time = this.delivery['time'];
+			this.delivery.request = true;
+			this.delivery.confirmation = false;
+			this.delivery.delivered = false;
 			if (place != null && date != null && time != null) {
 				this.afDatabase.list(`order/${auth.uid}/products`).push(this.cart);
 				this.afDatabase.list(`order/${auth.uid}/meetingdetails`).push(this.delivery);
 				this.afDatabase.list(`order/${auth.uid}/ordersummary`).push(this.orderSummary);
-				this.afDatabase.list(`order/${auth.uid}`).push({confirmation: " ", delivered: false});
 				this.afDatabase.list(`cart/${auth.uid}`).remove();
 				this.dismiss();
 				var checkoutMessage = 'We will contact you if your order has been reconfirmed';

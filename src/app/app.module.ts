@@ -14,7 +14,6 @@ import { AddCartPage } from '../pages/add-cart/add-cart';
 import { ProfilePage } from '../pages/profile/profile';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { OrderDetailsPage  } from '../pages/orderdetails/orderdetails';
-import { EditAccountPage } from '../pages/editaccount/editaccount';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -43,8 +42,7 @@ export const appConfig = {
     ProfilePage,
     AddCartPage,
     CheckoutPage,
-    OrderDetailsPage,
-    EditAccountPage
+    OrderDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -80,8 +78,7 @@ export const appConfig = {
     ProfilePage,
     AddCartPage,
     CheckoutPage,
-    OrderDetailsPage,
-    EditAccountPage
+    OrderDetailsPage
   ],
   providers: [
     StatusBar,
