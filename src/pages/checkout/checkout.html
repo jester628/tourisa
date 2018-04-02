@@ -1,6 +1,10 @@
 <ion-header>
   <ion-navbar>
-  	<button ion-button left class = "arrowBack" (click) = "dismiss()"><ion-icon name ="arrow-round-back"></ion-icon>GO BACK</button>
+  	 <ion-buttons left>
+            <button ion-button icon-only (click)="viewCtrl.dismiss()">
+                <ion-icon name="arrow-round-back"></ion-icon>
+            </button>
+        </ion-buttons>
     <ion-title>Checkout</ion-title>
   </ion-navbar>
 </ion-header>
