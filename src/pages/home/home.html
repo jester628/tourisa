@@ -18,9 +18,6 @@
       <button ion-item (click)="openAccount()">
         Account
       </button>
-      <button ion-item (click)="openFeedback()">
-        Feedback
-      </button>
       <button ion-item (click)="logout()">
         Logout
       </button>
@@ -37,8 +34,8 @@
       <ion-thumbnail item-start>
         <img src="{{ productItem['pic'] }}" class = "productimg" alt = "productimg">
       </ion-thumbnail>
-      <ion-badge>{{ productItem['price'] }}</ion-badge>
-      <button ion-button [disabled]="isenabled" item-end class = "cartBtn" name = "cartBtn" (click) = "viewProduct(productItem['name'])">
+      <ion-badge>{{'P' + productItem['price'] + '.00' }}</ion-badge>
+      <button ion-button item-end class = "cartBtn" name = "cartBtn" (click) = "viewProduct(productItem['name'])">
         <ion-icon name="basket"></ion-icon>
       </button>
     </ion-item>

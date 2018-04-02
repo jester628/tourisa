@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { User } from "../../modals/user";
-import { HomePage } from "../../pages/home/home";
-import { RegisterPage } from "../../pages/register/register";
-import * as firebase from "firebase";
+import { User } from '../../modals/user';
+import { HomePage } from '../../pages/home/home';
+import { RegisterPage } from '../../pages/register/register';
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -15,43 +15,25 @@ import * as firebase from "firebase";
 
 export class LoginPage {
   user = {} as User;
-  public progressBarLoader : any;
 
-  constructor (private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController, public loadingCtrl: LoadingController) {}
-
-  showLoader(timeInMilliseconds) {
-    let progressBarLoader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: timeInMilliseconds
-    });
-    progressBarLoader.present();
-  }
-
-  hideLoader(){
-    try{
-      if(this.progressBarLoader != null || this.progressBarLoader != undefined){
-        this.progressBarLoader.dismiss();
-      }
-    }catch(e){      
-      console.log("Busy Indecator not showing :: " + e.message);
-    }
-  }
+  constructor (public toast: ToastController, public navCtrl: NavController, private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {}
 
   async register () {
     this.navCtrl.push(RegisterPage);
   }
 
   matchingRole() {
-    this.ofAuth.authState.take(1).subscribe(auth => {
+    this.ofAuth.authState.take(1).subscribe( auth => {
       this.afDatabase.list(`users/${auth.uid}`).valueChanges().subscribe(snapshot => {
         snapshot.forEach(role => {
           if (role['customer'] === true) {
-                this.navCtrl.setRoot(HomePage);
+            firebase.database().goOnline();
+            this.navCtrl.setRoot(HomePage);
           } else if (role['customer'] === false) {
-              this.toast.create({
-                    message: `Denied access`,
-                    duration: 3000
-              }).present();
+            this.toast.create({
+              message: 'Denied access',
+              duration: 3000
+            }).present();
           }
         });
       });
@@ -61,10 +43,15 @@ export class LoginPage {
   async login(user: User) {
     try {
       const result = await this.ofAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
         if (result) {
             this.matchingRole();
-        }  
+        } else {
+          this.toast.create({
+              message: 'Incomplete profile details',
+              duration: 3000
+          }).present();            
+        }
       });
     } catch (e) {
         this.toast.create({
@@ -74,7 +61,4 @@ export class LoginPage {
     }
   }
 }
-
-        
- 
  

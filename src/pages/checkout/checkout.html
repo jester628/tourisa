@@ -1,48 +1,18 @@
 <ion-header>
-
   <ion-navbar>
   	<button ion-button left class = "arrowBack" (click) = "dismiss()"><ion-icon name ="arrow-round-back"></ion-icon>GO BACK</button>
-    <ion-title>checkout</ion-title>
+    <ion-title>Checkout</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content class = "myContent" padding>
 	<h1> Order Summary </h1>
 	<ion-list>
 	  <ion-item>
-	  	<p> Item total: P{{ itemTotal }} </p>
-	  	<p> Service fee: P{{ serviceFee }} </p>
-	  	<p> Order total:  P{{ orderTotal }} </p>
+	  	<p> Item total: P{{ itemTotal }}.00 </p>
+	  	<p> Service fee: P{{ serviceFee }}.00 </p>
+	  	<p> Order total:  P{{ orderTotal }}.00 </p>
 	  </ion-item>
-	</ion-list>
-
-	<h1> Meeting Details </h1>
-	<ion-list inset>
-		<ion-item>
-		<ion-label>Place</ion-label>
-		  <ion-select name="place" [(ngModel)]="delivery.place" required>
-		  	<ion-option value="vliner">Victory Liner Terminal</ion-option>
-		  	<ion-option value="joybus">Joy Bus Liner</ion-option>
-		  	<ion-option value="burnham">Burnham Park</ion-option>
-		  	<ion-option value="sm">SM Baguio</ion-option>
-		  	<ion-option value="mvpark">Minesview Park</ion-option>
-		  </ion-select>
-		</ion-item>
-
-		<ion-item>
-		<ion-label>Hour</ion-label>	
-		<ion-datetime displayFormat="h:mm" pickerFormat="h:mm" [(ngModel)]="delivery.hour" name="hour"> </ion-datetime>
-		</ion-item>
-
-		<ion-item>
-		  <ion-label>AM or PM </ion-label>	
-		  <ion-select name="time" [(ngModel)]="delivery.time" required>
-		  	<ion-option value="morning">AM</ion-option>
-		  	<ion-option value="afternoon">PM</ion-option>
-		  </ion-select>
-		</ion-item>
 	</ion-list>
 
 	<h1> Items in Cart </h1>
@@ -53,14 +23,40 @@
 			</ion-avatar>
 			<h2>{{ item['name'] }}</h2>
 			<p>{{ item['supplier'] }}</p>
-			<p>Price: P{{ item['price'] }}</p>
+			<p>Price: P{{ item['price'] }}.00</p>
 			<p>Quantity: {{ item['quantity'] }}</p>
-			<p class = "cost">Cost: P{{ item['cost'] }}</p>
+			<p class = "cost">Cost: P{{ item['cost'] }}.00</p>
 		</ion-item>
 	</ion-list>
 
+	<h1> Meeting Details </h1>
+	<ion-list inset>
+		<ion-item>
+		<ion-label>Place</ion-label>
+		  <ion-select name="place" [(ngModel)]="delivery.place" required>
+		  	<ion-option value="Victory Liner">Victory Liner Terminal</ion-option>
+		  	<ion-option value="Joy Bus Terminal">Joy Bus Terminal</ion-option>
+		  	<ion-option value="Burnham Park">Burnham Park</ion-option>
+		  	<ion-option value="SM">SM Baguio</ion-option>
+		  	<ion-option value="Minesview Park">Minesview Park</ion-option>
+		  </ion-select>
+		</ion-item>
+
+
+		<ion-item>
+		<ion-label>Date</ion-label>	
+		<ion-datetime displayFormat="MMM-D" pickerFormat="MMM D" min = "{{ minDate }}" max ="{{ maxDate }}" [(ngModel)]="delivery.date" name="date" required> </ion-datetime>
+		</ion-item>
+
+		<ion-item>
+		<ion-label>Time</ion-label>	
+		<ion-datetime displayFormat="h:mm A" pickerFormat=" h:mm A" hourValues="08,09,10,11,12,01,02,03,04,05,06,07" [(ngModel)]="delivery.time" name="time" required> </ion-datetime>
+		</ion-item>
+
+	</ion-list>
+
  <ion-fab right bottom>
-   <button ion-fab (click) = "checkout()">
+   <button ion-fab [disabled]="isEnabled" (click) = "checkout()">
     <ion-icon name="checkmark"></ion-icon>
    </button>
  </ion-fab>

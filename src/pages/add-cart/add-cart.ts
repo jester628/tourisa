@@ -23,8 +23,6 @@ export class AddCartPage {
 		this.product.pic = this.navParams.get('pic');
 		this.product.price = this.navParams.get('price');
 		this.product.supplier = this.navParams.get('supplier');
-		/// this.product.quantity is already declared when user inputs their quantity
-		console.log(this.product);
 		this.ofAuth.authState.take(1).subscribe(auth => {
 			this.afDatabase.list<Product>(`cart/${auth.uid}/`).push(this.product).then(() => {
 				this.toast.create({

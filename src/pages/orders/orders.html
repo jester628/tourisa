@@ -1,30 +1,33 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Tourisa</ion-title>
+    <ion-title>Orders</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class = "myContent" padding>
-<ion-grid>
-	<ion-col>
-	<div class="row header">
-          <div class="col">Date</div>
-          <div class="col">Time</div>
-          <div class="col">Place</div>
-          <div class="col">Cost</div>
-        </div>
-  </ion-col>
-</ion-grid>
-<ion-grid>
-  <ion-col>
-	   <div class="row header">
-        <div class="col">01-01-2018</div>
-        <div class="col">9:00</div>
-        <div class="col">Burnham Park</div>
-        <div class="col">130.00</div>
-      </div>
-  </ion-col>
-</ion-grid>
+<h2> Current Orders </h2>
+<ion-list  *ngIf="meetingArray != null">
+  <button ion-item *ngFor="let detail of meetingArray" (click) = "orderDetails()">
+    <h2>{{ detail['date'] }}</h2>
+    <p>{{ detail['place'] }} • {{ detail['time'] }}</p>
+    <ion-badge *ngIf="confirmation == true">Order is confirmed</ion-badge>
+    <ion-badge *ngIf="confirmation == null">Order has not been confirmed yet</ion-badge>
+    <ion-badge *ngIf="confirmation == false">No stock</ion-badge>
+    <ion-icon item-end name = "arrow-forward"></ion-icon>
+  </button>
+</ion-list>
+
+<h2 *ngIf="meetingArray == null">No orders at the moment</h2>
+
+<!-- <h2> Past Orders </h2>
+<ion-list>
+<button ion-item>
+  <h2></h2>
+  <p></p>
+  <ion-icon item-end name = "arrow-forward"></ion-icon>
+</button>
+<h2 *ngIf="meetingArray != null">No orders at the moment</h2>
+</ion-list> --> 
 </ion-content>
 
 <ion-nav #content [root]="rootPage"></ion-nav>

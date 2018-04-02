@@ -6,7 +6,6 @@ import { OrdersPage } from '../../pages/orders/orders';
 import { LoginPage } from '../../pages/login/login';
 import { AddCartPage } from '../../pages/add-cart/add-cart';
 import { AccountPage } from '../../pages/account/account';
-import { FeedbackPage } from '../../pages/feedback/feedback';
 import { CheckoutPage } from '../../pages/checkout/checkout';
 import * as firebase from 'firebase';
 
@@ -18,7 +17,6 @@ import * as firebase from 'firebase';
 
 export class HomePage {
     public productArray: any = [];
-    private isEnabled: boolean = false;
 
     constructor(public toast: ToastController, public navCtrl: NavController, private modalCtrl: ModalController, public menuCtrl: MenuController, private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {}
 
@@ -46,7 +44,6 @@ export class HomePage {
     }
 
     async openMenu() {
-       this.isEnabled = true;
        this.menuCtrl.open();
     }
 
@@ -58,12 +55,7 @@ export class HomePage {
         this.navCtrl.push(AccountPage);
     }
 
-    async openFeedback() {
-        this.navCtrl.push(FeedbackPage);
-    }
-
     async closeMenu() {
-        this.isEnabled = false;
         this.menuCtrl.close();
     }
 
@@ -82,9 +74,6 @@ export class HomePage {
         this.productArray.forEach(product => {
             if(product['name'] == productName) {
                 let modalProduct = this.modalCtrl.create(AddCartPage, {name: product['name'], pic: product['pic'], price: product['price'], supplier: product['supplier']});
-                modalProduct.onDidDismiss(data => {
-                    console.log(data);
-                });
                 modalProduct.present();
             }
         });
@@ -92,11 +81,6 @@ export class HomePage {
 
     async checkout() {
         let modalCheckout = this.modalCtrl.create(CheckoutPage);
-        modalCheckout.onDidDismiss(data => {
-            console.log(data);
-        });
         modalCheckout.present();
     }
 }    
-
-

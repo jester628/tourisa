@@ -10,10 +10,11 @@ import { OrdersPage } from '../pages/orders/orders';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { AccountPage } from '../pages/account/account';
-import { FeedbackPage } from '../pages/feedback/feedback';
 import { AddCartPage } from '../pages/add-cart/add-cart';
 import { ProfilePage } from '../pages/profile/profile';
 import { CheckoutPage } from '../pages/checkout/checkout';
+import { OrderDetailsPage  } from '../pages/orderdetails/orderdetails';
+import { EditAccountPage } from '../pages/editaccount/editaccount';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -23,12 +24,12 @@ import { HttpModule } from '@angular/http';
 import { Firebase } from '@ionic-native/firebase';
 
 export const appConfig = {
-    databaseURL: "https://tourisa-628ef.firebaseio.com",
-    apiKey: "AIzaSyDB3ohWWUA7F0ppgDwCgP-KN2IcgYZYOR0",
-    authDomain: "tourisa-628ef.firebaseapp.com",
-    projectId: "tourisa-628ef",
-    storageBucket: "tourisa-628ef.appspot.com",
-    messagingSenderId: "595936375688"
+    apiKey: "AIzaSyBE_0KKClbBy5VoSHUwOCO89V4xHNY_qag",
+    authDomain: "salubong-88dde.firebaseapp.com",
+    databaseURL: "https://salubong-88dde.firebaseio.com",
+    projectId: "salubong-88dde",
+    storageBucket: "salubong-88dde.appspot.com",
+    messagingSenderId: "410395805346"
 };
 
 @NgModule({
@@ -39,10 +40,11 @@ export const appConfig = {
     LoginPage,
     RegisterPage,
     AccountPage,
-    FeedbackPage,
     ProfilePage,
     AddCartPage,
-    CheckoutPage
+    CheckoutPage,
+    OrderDetailsPage,
+    EditAccountPage
   ],
   imports: [
     BrowserModule,
@@ -75,10 +77,11 @@ export const appConfig = {
     LoginPage,
     RegisterPage,
     AccountPage,
-    FeedbackPage,
     ProfilePage,
     AddCartPage,
-    CheckoutPage
+    CheckoutPage,
+    OrderDetailsPage,
+    EditAccountPage
   ],
   providers: [
     StatusBar,

@@ -1,5 +1,5 @@
 export interface Delivery {
 	place: String;
-	hour: String;
+	date: String;
 	time: String;
 }

@@ -15,21 +15,34 @@ import { HomePage } from '../../pages/home/home';
 export class ProfilePage {
     profile = {} as Profile; 
 
-    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams){ }
+    constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {}
     
   
     createProfile() {
        try {
-            this.ofAuth.authState.take(1).subscribe(auth => {
-              this.profile.customer = true;
-              this.afDatabase.list<Profile>(`users/${auth.uid}`).push(this.profile).then(() => 
-                 this.navCtrl.setRoot(HomePage));
-           })
+          var username = this.profile['username'];
+          var firstname = this.profile['firstname'];
+          var lastname = this.profile['lastname'];
+          var contactnum = this.profile['contactnum'];
+          
+         if (username != null && firstname != null && lastname != null && contactnum != null) {
+            this.ofAuth.authState.subscribe(auth => {
+                this.profile.customer = true;
+                this.afDatabase.list<Profile>(`users/${auth.uid}`).push(this.profile).then(() => {
+                  this.navCtrl.setRoot(HomePage)
+                });
+            });
+         } else {
+            this.toast.create({
+              message: 'Please fill up all profile details',
+              duration: 3000
+            }).present(); 
+         }
        } catch (e) {
             this.toast.create({
                 message: e.message,
                 duration: 3000
-            }); 
+            }).present(); 
        }
     }
 }

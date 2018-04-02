@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController } from 'ionic-angular';
-import { LoginPage } from '../../pages/login/login';
-import { AccountPage } from '../../pages/account/account';
-import { FeedbackPage } from '../../pages/feedback/feedback';
+import { IonicPage, NavController, MenuController, ModalController } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { OrderDetailsPage  } from '../../pages/orderdetails/orderdetails';
 
 @IonicPage()
 @Component({
@@ -10,40 +10,31 @@ import { FeedbackPage } from '../../pages/feedback/feedback';
   templateUrl: 'orders.html'
 })
 export class OrdersPage {
+	public meetingArray: any = [];
+	public confirmation: boolean;
 
-	constructor(public navCtrl: NavController, public menuCtrl: MenuController) {
+	constructor(public navCtrl: NavController, public menuCtrl: MenuController, private modalCtrl: ModalController, private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {} 
 
+	ionViewDidLoad() {
+		this.ofAuth.authState.take(1).subscribe(auth => {
+			this.afDatabase.list(`order/${auth.uid}/meetingdetails`).valueChanges().subscribe(snapshot => {
+				snapshot.forEach(detail => {
+					this.meetingArray.push(detail);
+				});
+			});
+
+
+			this.afDatabase.list(`order/${auth.uid}`).valueChanges().subscribe(snapshot => {
+				if (snapshot['confirmation']) {
+					this.confirmation = snapshot['confirmation'];
+				}
+			});
+
+		});
 	}
 
-	async openMenu() {
-	   this.menuCtrl.open();
+	async orderDetails() {
+		let modalOrder = this.modalCtrl.create(OrderDetailsPage);
+        modalOrder.present();
 	}
-
-	async openOrders() {
-	    this.navCtrl.push(OrdersPage);
-	}
-
-	async openAccount() {
-	    this.navCtrl.push(AccountPage);
-	}
-
-	async openFeedback() {
-	    this.navCtrl.push(FeedbackPage);
-	}
-
-	async closeMenu() {
-	    this.menuCtrl.close();
-	}
-
-	async logout() {
-	    try {
-	        firebase.auth().signOut();
-	        console.log('User has logged off');
-	        firebase.database().goOffline();
-	        this.navCtrl.setRoot(LoginPage);
-	    } catch (e) {
-	        console.error(e);
-	    }
-	} 
-
 }

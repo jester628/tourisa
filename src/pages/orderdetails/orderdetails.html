@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+  	<button ion-button left class = "arrowBack" (click) = "dismiss()"><ion-icon name ="arrow-round-back"></ion-icon>GO BACK</button>
+    <ion-title>Order Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class = "myContent" padding>
+	<h1> Order Summary </h1>
+	<ion-list>
+	  <ion-item *ngFor="let detail of orderArray">
+	  	<p> Item total: P{{ detail['ItemTotal'] }}.00 </p>
+	  	<p> Service fee: P{{ detail['ServiceFee'] }}.00 </p>
+	  	<p> Order total:  P{{ detail['OrderTotal'] }}.00 </p>
+	  </ion-item>
+	</ion-list>
+
+	<h1> Items in Cart </h1>
+	<ion-list>
+		<ion-item *ngFor="let product of productsArray">
+			<ion-avatar item-start>
+			  <img src="{{ product['pic'] }}">
+			</ion-avatar>
+			<h2>{{ product['name'] }}</h2>
+			<p>{{ product['supplier'] }}</p>
+			<p>Price: P{{ product['price'] }}.00</p>
+			<p>Quantity: {{ product['quantity'] }}</p>
+			<p class = "cost">Cost: P{{ product['cost'] }}.00</p>
+		</ion-item>
+	</ion-list>
+</ion-content>
