@@ -29,19 +29,21 @@ export class EditAccountPage {
 		try {
 			console.log(this.profile);
 			this.ofAuth.authState.take(1).subscribe(auth => {
-				this.afDatabase.list<Profile>(`users/${auth.uid}`).update(this.profile).then(() =>{
+				this.profile.customer = true;
+				this.afDatabase.list<Profile>(`users/${auth.uid}`).set(this.profile).then(() => {
+					this.cdr.detectChanges();
 					this.navCtrl.pop();
 					this.toast.create({
 						message: 'Profile has been updated',
 						duration: 3000
-					});
+					}).present();
 				});
 			});
 		} catch (e) {
 			this.toast.create({
 				message: e.message,
 				duration: 3000
-			});
+			}).present();
 		}
 	}
 

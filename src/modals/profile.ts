@@ -2,6 +2,6 @@ export interface Profile {
     username: string;
     firstname: string;
     lastname: string;
-    contactnum: number;
+    contactnum: string;
     customer: boolean;
 }
