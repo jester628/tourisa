@@ -26,7 +26,7 @@ export class OrdersPage {
 
 			this.afDatabase.list(`order/${auth.uid}`).valueChanges().subscribe(snapshot => {
 				snapshot.forEach(confirm => {
-					this.confirmation = confirm.confirmation;
+					//this.confirmation = confirm.confirmation;
 				});	
 			});
 		});

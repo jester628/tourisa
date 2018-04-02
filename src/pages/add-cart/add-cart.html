@@ -12,7 +12,13 @@
     <p>{{ this.navParams.get('supplier') }}</p>
     <ion-badge>{{ this.navParams.get('price') }}</ion-badge>
     <img src="{{ this.navParams.get('pic') }}" class = "productimg" alt = "productimg">
-    <ion-input type="text" name ="quantity" placeholder="quantity" [(ngModel)]="product.quantity"> </ion-input>
+
+    <ion-label>Quantity</ion-label>
+    <button ion-fab mini (click) = "decrease(product.quantity)">-</button> 
+    <ion-input type="text" name ="quantity" value = "0" [(ngModel)]="product.quantity"> </ion-input>
+    <button ion-fab mini (click) = "increase(product.quantity)">+</button>
+   
+    
     <button ion-button (click) = "addToCart()">Add to cart</button>
 </div>
 </ion-content>

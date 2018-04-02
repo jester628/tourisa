@@ -17,6 +17,23 @@ export class AddCartPage {
 	async dismiss() {
 	    this.navCtrl.pop();
 	}
+
+	async increase(quantity) {
+		var increasedQuantity = parseInt(quantity);
+		
+		if (increasedQuantity >= 0) {
+			increasedQuantity += 1;
+			this.product.quantity = increasedQuantity;
+		}
+	}
+
+	async decrease() {
+		var decreasedQuantity = parseInt(this.product.quantity);
+		if (decreasedQuantity > 0) {
+			decreasedQuantity -= 1;
+			this.product.quantity = decreasedQuantity;
+		}
+	}
 		
 	async addToCart() {
 		this.product.name = this.navParams.get('name');
