@@ -18,12 +18,12 @@ export class ProfilePage {
     constructor(private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {}
     
   
-    createProfile() {
+    async createProfile() {
        try {
-          this.ofAuth.authState.take(1).subscribe(auth => {
-              this.profile.customer = true;
+        this.profile.customer = true;
+          this.ofAuth.authState.subscribe(auth => {
               this.afDatabase.list<Profile>(`users/${auth.uid}`).push(this.profile).then(() => {
-                this.navCtrl.setRoot(HomePage)
+                this.navCtrl.setRoot(HomePage);
               });
           });
        } catch (e) {

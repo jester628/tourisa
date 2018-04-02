@@ -43,7 +43,7 @@ export class LoginPage {
   async login(user: User) {
     try {
       const result = await this.ofAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
         if (result) {
             this.matchingRole();
         } else {
