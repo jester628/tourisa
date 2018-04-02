@@ -1,6 +1,6 @@
 <ion-header>
-
   <ion-navbar>
+  	<button ion-button left class = "arrowBack" (click) = "dismiss()"><ion-icon name ="arrow-round-back"></ion-icon>GO BACK</button>
     <ion-title>Edit Account</ion-title>
   </ion-navbar>
 
@@ -11,9 +11,9 @@
   <ion-list inset *ngFor="let info of acctArray">
     <ion-label>Username</ion-label>
     <ion-item>
-      <ion-input type="text" name="username" value= "{{ profile.username }}" [(ngModel)]="profile.username" required></ion-input>
+      <ion-input type="text" id = "username" name="username" value= "{{ info['username'] }}" [(ngModel)]="profile.username" required></ion-input>
     </ion-item>
-    <ion-label>First Name</ion-label>
+<!--     <ion-label>First Name</ion-label>
     <ion-item>
       <ion-input type="text" name="firstname" value= "{{ info['firstname'] }}" [(ngModel)]="profile.firstname" required></ion-input>
     </ion-item>
@@ -24,7 +24,7 @@
     <ion-label>Contact Number</ion-label>
      <ion-item>
       <ion-input type="text" name="contactnum" value= "{{ info['contactnum'] }}" [(ngModel)]="profile.contactnum" required></ion-input>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
 
   <button ion-button class="submit-btn" full type="submit" (click) = "newProfile()">Submit New Profile</button>

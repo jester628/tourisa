@@ -18,7 +18,7 @@ export class AccountPage {
 		this.ofAuth.authState.take(1).subscribe(auth => {
 			this.afDatabase.list(`users/${auth.uid}`).valueChanges().subscribe(snapshot => {
 				snapshot.forEach( info => {
-					this.acctArray.push(info);
+						this.acctArray.push(info);
 				});
 			})
 		});		 

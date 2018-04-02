@@ -66,7 +66,6 @@ export class CheckoutPage {
 
 	ionViewWillLoad() {
 		var returnOrder = this.checkOrder();
-		console.log(JSON.stringify(returnOrder));
 		this.ofAuth.authState.take(1).subscribe(auth => {
             this.afDatabase.list(`cart/${auth.uid}`).valueChanges().subscribe(snapshot => {
                 snapshot.forEach(product => {
@@ -98,7 +97,7 @@ export class CheckoutPage {
 				this.afDatabase.list(`order/${auth.uid}/products`).push(this.cart);
 				this.afDatabase.list(`order/${auth.uid}/meetingdetails`).push(this.delivery);
 				this.afDatabase.list(`order/${auth.uid}/ordersummary`).push(this.orderSummary);
-				this.afDatabase.list(`order/${auth.uid}`).push({confirmation: null, delivered: false});
+				this.afDatabase.list(`order/${auth.uid}`).push({confirmation: " ", delivered: false});
 				this.afDatabase.list(`cart/${auth.uid}`).remove();
 				this.dismiss();
 				var checkoutMessage = 'We will contact you if your order has been reconfirmed';

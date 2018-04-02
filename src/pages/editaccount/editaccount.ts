@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Profile } from '../../modals/profile';
+
 
 @IonicPage()
 @Component({
@@ -11,24 +14,19 @@ export class EditAccountPage {
 	profile = {} as Profile
 	public acctArray: any = [];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams) {}
+	constructor(public navCtrl: NavController, public navParams: NavParams, private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private cdr: ChangeDetectorRef) {}
 
+	async dismiss() {
+	    this.navCtrl.pop();
+	}
+	
 	ionViewDidLoad() {
-		this.acctArray.forEach( info => {
-			this.profile.username = info['username'];
-			this.profile.firstname = info['firstname'];
-			this.profile.lastname = info['lastname'];
-			this.profile.contactnum = info['contactnum'];
-			this.acctArray.push(info);
-		});
+		this.acctArray = this.navParams.get('acctArray');
+		this.cdr.detectChanges();
 	}
 
 	async newProfile () {
-		this.ofAuth.authState.take(1).subscribe(auth => {
-			this.afDatabase.list<Profile>(`users/${auth.uid}`).push(this.profile).then(() => {
-				
-			})
-		});	
+		console.log(this.profile.username);	
 	}
 
 }
