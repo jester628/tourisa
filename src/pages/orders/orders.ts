@@ -11,7 +11,7 @@ import { OrderDetailsPage  } from '../../pages/orderdetails/orderdetails';
 })
 export class OrdersPage {
 	public meetingArray: any = [];
-	public confirmation: boolean;
+	public confirmationValue: boolean;
 
 	constructor(public navCtrl: NavController, public menuCtrl: MenuController, private modalCtrl: ModalController, private ofAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {} 
 
@@ -26,7 +26,7 @@ export class OrdersPage {
 
 			this.afDatabase.list(`order/${auth.uid}`).valueChanges().subscribe(snapshot => {
 				snapshot.forEach(confirm => {
-					//this.confirmation = confirm.confirmation;
+					this.confirmationValue = confirm.confirmation;
 				});	
 			});
 		});

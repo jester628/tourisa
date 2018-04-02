@@ -21,7 +21,7 @@ export class AddCartPage {
 	async increase(quantity) {
 		var increasedQuantity = parseInt(quantity);
 		
-		if (increasedQuantity >= 0) {
+		if (increasedQuantity >= 0 && increasedQuantity < 10) {
 			increasedQuantity += 1;
 			this.product.quantity = increasedQuantity;
 		}
@@ -41,6 +41,7 @@ export class AddCartPage {
 		this.product.price = this.navParams.get('price');
 		this.product.supplier = this.navParams.get('supplier');
 		this.ofAuth.authState.take(1).subscribe(auth => {
+			console.log(this.product);
 			this.afDatabase.list<Product>(`cart/${auth.uid}/`).push(this.product).then(() => {
 				this.toast.create({
 					message: `${this.product.quantity} ${this.product.name} has been added to your cart`,
